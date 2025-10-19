@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security 212 — Professional Security & Training</title>
+  <meta name="description" content="Security 212 provides professional security services, staffing, and industry-approved training." />
+
+  <!-- Favicon (add your file to /images) -->
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Color scheme inspired by the logo */
+      --primary:#1E5AA8;      /* Security 212 blue */
+      --primary-600:#1b4d8f;
+      --primary-300:#4a84cb;
+      --ink:#0d1b2a;          /* near-black silhouette tone */
+      --muted:#6b7280;        /* gray text */
+      --bg:#f6f8fb;           /* page background */
+      --card:#ffffff;         /* surfaces */
+      --ring:rgba(30,90,168,.25);
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --shadow:0 10px 25px rgba(13,27,42,.12), 0 2px 6px rgba(13,27,42,.06);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.6;
+    }
+
+    /* Header / Nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(180%) blur(10px);
+      background:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(13,27,42,.06);
+    }
+    .nav-inner{
+      max-width:1200px; margin:0 auto; padding:10px 18px;
+      display:flex; align-items:center; gap:18px; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .brand img{height:42px; width:auto}
+    .brand span{font-weight:800; letter-spacing:.4px; color:var(--primary)}
+    .nav ul{display:flex; gap:18px; list-style:none; padding:0; margin:0}
+    .nav a{
+      text-decoration:none; color:var(--ink); font-weight:600; padding:8px 12px; border-radius:10px;
+    }
+    .nav a:hover{background:rgba(30,90,168,.08); color:var(--primary)}
+    .nav .cta{
+      background:var(--primary); color:#fff;
+      box-shadow:var(--shadow);
+    }
+    .nav .cta:hover{background:var(--primary-600)}
+    .hamburger{display:none; border:none; background:transparent; font-size:26px; padding:6px 10px; border-radius:10px}
+    .hamburger:focus-visible{outline:3px solid var(--ring)}
+
+    /* Mobile menu */
+    @media (max-width: 900px){
+      .nav ul{display:none}
+      .nav ul.open{display:flex; position:absolute; left:0; right:0; top:65px; background:#fff; padding:14px; flex-direction:column; gap:10px; border-bottom:1px solid rgba(13,27,42,.06)}
+      .hamburger{display:block}
+    }
+
+    /* Hero */
+    .hero{
+      position:relative; isolation:isolate;
+      min-height:70vh; display:grid; place-items:center; text-align:center;
+      color:#fff; overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(13,27,42,.50), rgba(13,27,42,.65)),
+        url("images/hero-security.jpg") center/cover no-repeat; /* add your image */
+    }
+    .hero .content{max-width:1000px; padding:80px 18px}
+    .kicker{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(30,90,168,.8); font-weight:700; letter-spacing:.5px}
+    .hero h1{margin:18px 0 12px; font-size:clamp(28px, 6vw, 56px); line-height:1.1}
+    .hero p{margin:0 auto 26px; max-width:780px; font-size:clamp(16px, 2.5vw, 20px); opacity:.95}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:700;
+      border:2px solid transparent; cursor:pointer; transition:.2s;
+    }
+    .btn-primary{background:#fff; color:var(--primary)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-outline{border-color:#fff; color:#fff; background:transparent}
+    .btn-outline:hover{background:rgba(255,255,255,.12)}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+
+    /* Sections */
+    section{padding:80px 18px}
+    .wrap{max-width:1200px; margin:0 auto}
+
+    .section-title{font-size:clamp(24px, 3.5vw, 36px); margin:0 0 12px}
+    .section-sub{color:var(--muted); margin:0 0 28px}
+
+    /* Cards grid */
+    .grid{display:grid; gap:18px}
+    @media (min-width:700px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:900px){ .grid.cols-4{grid-template-columns:repeat(4,1fr)} }
+
+    .card{
+      background:var(--card); border-radius:18px; padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+      transform:translateZ(0);
+    }
+    .card:hover{transform:translateY(-3px)}
+    .card img{width:100%; height:160px; object-fit:cover; border-radius:12px}
+    .chip{
+      display:inline-block; background:rgba(30,90,168,.1); color:var(--primary); border:1px solid rgba(30,90,168,.25);
+      padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.3px
+    }
+
+    /* About */
+    .about{
+      display:grid; gap:24px; align-items:center;
+    }
+    @media (min-width:900px){ .about{grid-template-columns:1.2fr .8fr} }
+    .about img{width:100%; border-radius:18px; height:100%; object-fit:cover; box-shadow:var(--shadow)}
+
+    /* Stats */
+    .stats{display:grid; gap:16px}
+    @media (min-width:700px){ .stats{grid-template-columns:repeat(4,1fr)} }
+    .stat{background:#fff; border-radius:16px; padding:18px; text-align:center; box-shadow:var(--shadow)}
+    .stat .num{font-size:34px; font-weight:800; color:var(--primary)}
+    .stat .label{color:var(--muted); font-weight:600}
+
+    /* Vacancies / Accordions */
+    .accordion{display:grid; gap:12px}
+    .acc{
+      background:#fff; border-radius:14px; box-shadow:var(--shadow); overflow:hidden
+    }
+    .acc summary{
+      list-style:none; cursor:pointer; padding:16px 18px; font-weight:700; display:flex; align-items:center; justify-content:space-between; gap:10px
+    }
+    .acc summary::marker{display:none}
+    .acc summary span{color:var(--primary)}
+    .acc .content{padding:0 18px 18px; color:var(--muted)}
+    .tag{display:inline-block; padding:4px 8px; border-radius:999px; background:rgba(16,185,129,.12); color:var(--ok); margin-left:auto; font-size:12px; font-weight:800}
+
+    /* Training timeline */
+    .timeline{position:relative; margin:20px 0; padding-left:20px}
+    .timeline::before{
+      content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(var(--primary), var(--primary-300));
+      border-radius:6px;
+    }
+    .tl-item{position:relative; margin:0 0 18px 0; background:#fff; padding:14px 14px 14px 18px; border-radius:14px; box-shadow:var(--shadow)}
+    .tl-item::before{
+      content:""; position:absolute; left:-2px; top:16px; width:12px; height:12px; border:3px solid #fff; background:var(--primary); border-radius:50%; box-shadow:0 0 0 3px var(--ring)
+    }
+
+    /* Contact */
+    .contact{
+      display:grid; gap:24px;
+    }
+    @media (min-width:900px){ .contact{grid-template-columns:1fr 1fr} }
+    .form{
+      background:#fff; border-radius:18px; padding:18px; box-shadow:var(--shadow)
+    }
+    label{font-weight:700; font-size:14px}
+    input, textarea, select{
+      width:100%; padding:12px 12px; border-radius:12px; border:1px solid #e5e7eb; margin-top:6px;
+      font-family:inherit; font-size:15px; background:#fff;
+    }
+    input:focus, textarea:focus, select:focus{outline:3px solid var(--ring); border-color:var(--primary-300)}
+    textarea{min-height:130px; resize:vertical}
+    .muted{color:var(--muted)}
+
+    /* Footer */
+    footer{padding:40px 18px; background:#0f172a; color:#d1d5db}
+    .footer-inner{max-width:1200px; margin:0 auto; display:grid; gap:14px; align-items:center}
+    .foot-grid{display:grid; gap:12px}
+    @media (min-width:800px){ .footer-inner{grid-template-columns:auto 1fr auto} .foot-grid{grid-template-columns:repeat(3,1fr)} }
+
+    /* Reveal animation */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.visible{opacity:1; transform:translateY(0)}
+
+    /* Back to top */
+    .to-top{
+      position:fixed; right:16px; bottom:16px; z-index:40;
+      display:none; padding:10px 12px; border-radius:12px; background:var(--primary); color:#fff; border:none; box-shadow:var(--shadow);
+      cursor:pointer; font-weight:800;
+    }
+    .to-top.show{display:block}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Security 212 home">
+        <!-- Replace with your logo in /images -->
+        <img src="images/security212-logo.png" alt="Security 212 logo" />
+        <span>SECURITY 212</span>
+      </a>
+
+      <button class="hamburger" aria-label="Open menu" id="menuBtn">☰</button>
+
+      <ul id="menu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#vacances">Vacancies</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a class="cta" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home" role="region" aria-label="Hero">
+    <div class="content">
+      <span class="kicker">Professional • Reliable • Compliant</span>
+      <h1>Protecting People, Property & Reputation</h1>
+      <p>
+        From manned guarding and mobile patrols to CCTV operations and industry-approved training,
+        Security 212 delivers dependable security solutions across the UK.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#services">Explore Services</a>
+        <a class="btn btn-outline" href="#contact">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="wrap">
+    <h2 class="section-title reveal">Our Services</h2>
+    <p class="section-sub reveal">Flexible security packages tailored to your site, risk and budget.</p>
+
+    <div class="grid cols-3">
+      <article class="card reveal">
+        <img src="images/services-manned-guarding.jpg" alt="Manned guarding" loading="lazy">
+        <h3>Manned Guarding</h3>
+        <p class="muted">SIA-licensed officers providing static guarding, reception cover, concierge and access control.</p>
+        <span class="chip">24/7 Cover</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/services-mobile-patrols.jpg" alt="Mobile patrols" loading="lazy">
+        <h3>Mobile Patrols & Keyholding</h3>
+        <p class="muted">Scheduled & ad-hoc patrols, alarm response and secure locking/unlocking of premises.</p>
+        <span class="chip">Rapid Response</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/services-cctv.jpg" alt="CCTV" loading="lazy">
+        <h3>CCTV Monitoring</h3>
+        <p class="muted">Remote monitoring, analytics, evidence packs and incident reporting to support prosecutions.</p>
+        <span class="chip">BS-compliant</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/services-events.jpg" alt="Event security" loading="lazy">
+        <h3>Event & Venue Security</h3>
+        <p class="muted">Stewarding, crowd management and search teams for venues, festivals and private events.</p>
+        <span class="chip">Crowd Safe</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/services-retail.jpg" alt="Retail security" loading="lazy">
+        <h3>Retail & Loss Prevention</h3>
+        <p class="muted">Plain-clothes and uniformed officers to deter theft, manage incidents and protect staff.</p>
+        <span class="chip">Shrink Control</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/services-consulting.jpg" alt="Security consulting" loading="lazy">
+        <h3>Risk Assessment & Consulting</h3>
+        <p class="muted">Threat assessments, assignment instructions, and tailored policies to meet standards.</p>
+        <span class="chip">Expert Advice</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="about">
+      <div>
+        <h2 class="section-title reveal">About Security 212</h2>
+        <p class="section-sub reveal">We combine disciplined officers, robust supervision and transparent reporting.</p>
+
+        <div class="stats">
+          <div class="stat reveal">
+            <div class="num" data-counter="150">0</div>
+            <div class="label">Sites Protected</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num" data-counter="98">0%</div>
+            <div class="label">Client Retention</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num" data-counter="24">0/7</div>
+            <div class="label">Operations</div>
+          </div>
+          <div class="stat reveal">
+            <div class="num" data-counter="100">0%</div>
+            <div class="label">SIA Compliant</div>
+          </div>
+        </div>
+
+        <p class="muted reveal" style="margin-top:16px">
+          Based in Coventry, we serve clients nationwide with vetted, SIA-licensed professionals and
+          proactive management. Our digital logs and real-time reporting keep you fully informed.
+        </p>
+      </div>
+      <img class="reveal" src="images/about-team.jpg" alt="Security 212 team photo" loading="lazy">
+    </div>
+  </section>
+
+  <!-- VACANCIES -->
+  <section id="vacances" class="wrap">
+    <h2 class="section-title reveal">Vacancies</h2>
+    <p class="section-sub reveal">Join a professional team that invests in your development.</p>
+
+    <div class="accordion">
+      <details class="acc reveal">
+        <summary>
+          <span>Door Supervisor (Various Sites)</span>
+          <span class="tag">Hiring</span>
+        </summary>
+        <div class="content">
+          <p>Requirements: Valid SIA Door Supervisor licence, excellent communication, flexible availability.</p>
+          <p>Shift pattern: Days/Nights/Weekends. Competitive hourly rate, paid training and progression.</p>
+          <a class="btn btn-outline" href="#contact">Apply Now</a>
+        </div>
+      </details>
+
+      <details class="acc reveal">
+        <summary>
+          <span>Retail Security Officer – Midlands</span>
+          <span class="tag">New</span>
+        </summary>
+        <div class="content">
+          <p>Experience in retail/loss prevention preferred. Body-worn video and incident reporting skills useful.</p>
+          <a class="btn btn-outline" href="#contact">Apply Now</a>
+        </div>
+      </details>
+
+      <details class="acc reveal">
+        <summary>
+          <span>CCTV Operator (PSS)</span>
+          <span class="tag">Hot</span>
+        </summary>
+        <div class="content">
+          <p>Valid SIA CCTV (PSS) licence required. Control room experience and evidence handling desirable.</p>
+          <a class="btn btn-outline" href="#contact">Apply Now</a>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training" class="wrap">
+    <h2 class="section-title reveal">Training</h2>
+    <p class="section-sub reveal">Industry-aligned courses that boost confidence and employability.</p>
+
+    <div class="grid cols-3">
+      <article class="card reveal">
+        <img src="images/training-door.jpg" alt="Door supervisor training" loading="lazy">
+        <h3>Award for Door Supervisors</h3>
+        <p class="muted">Complete qualification with practical scenarios, conflict management and physical intervention.</p>
+        <span class="chip">Popular</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/training-cctv.jpg" alt="CCTV training" loading="lazy">
+        <h3>Award for CCTV Operators</h3>
+        <p class="muted">Control room operations, legislation and evidence handling for PSS environments.</p>
+        <span class="chip">2 Days</span>
+      </article>
+
+      <article class="card reveal">
+        <img src="images/training-health-safety.jpg" alt="First aid and safety" loading="lazy">
+        <h3>Emergency First Aid at Work</h3>
+        <p class="muted">Practical, workplace-focused first aid suitable for security roles and sites.</p>
+        <span class="chip">1 Day</span>
+      </article>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal"><strong>Step 1:</strong> Choose your course and preferred dates.</div>
+      <div class="tl-item reveal"><strong>Step 2:</strong> Complete online pre-course learning (where applicable).</div>
+      <div class="tl-item reveal"><strong>Step 3:</strong> Attend training & assessments at our centre or your site.</div>
+      <div class="tl-item reveal"><strong>Step 4:</strong> Receive certification and get work-ready with Security 212.</div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="#contact">Enquire About Training</a>
+      <a class="btn btn-outline" href="mailto:info@security212.com?subject=Training%20Enquiry">Email Us</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <h2 class="section-title reveal">Contact Us</h2>
+    <p class="section-sub reveal">We’ll respond promptly with the information you need.</p>
+
+    <div class="contact">
+      <div class="form reveal">
+        <form id="contactForm" novalidate>
+          <div style="display:grid; gap:12px; grid-template-columns:1fr 1fr">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="service">Service</label>
+            <select id="service" name="service" required>
+              <option value="">Select…</option>
+              <option>Manned Guarding</option>
+              <option>Mobile Patrols & Keyholding</option>
+              <option>CCTV Monitoring</option>
+              <option>Event Security</option>
+              <option>Retail Security</option>
+              <option>Training</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your site or training needs…" required></textarea>
+          </div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; align-items:center">
+            <button class="btn btn-primary" type="submit">Send Enquiry</button>
+            <span class="muted" id="formNote">Or email us at <a href="mailto:info@security212.com">info@security212.com</a></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="reveal">
+        <div class="card">
+          <h3>Company Details</h3>
+          <p class="muted">Email: <a href="mailto:info@security212.com">info@security212.com</a></p>
+          <p class="muted" style="margin-bottom:0">
+            Address: 111 New Union Street, Coventry, England, CV1 2NT
+          </p>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>Why Security 212?</h3>
+          <ul class="muted">
+            <li>Experienced, SIA-licensed professionals</li>
+            <li>Responsive management and clear reporting</li>
+            <li>Tailored solutions for every sector</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div style="display:flex; align-items:center; gap:10px">
+        <img src="images/security212-logo.png" alt="" style="height:34px">
+        <strong>Security 212</strong>
+      </div>
+
+      <div class="foot-grid">
+        <div><small>&copy; <span id="year"></span> Security 212. All rights reserved.</small></div>
+        <div><small>Made with care and compliance.</small></div>
+        <div style="text-align:right"><a class="btn" href="#home" style="background:#111827; color:#fff; padding:8px 14px">Back to top ↑</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => menu.classList.toggle('open'));
+
+    // IntersectionObserver for reveal animations
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, {threshold:.2});
+    revealEls.forEach(el => io.observe(el));
+
+    // Animated counters
+    const counters = document.querySelectorAll('[data-counter]');
+    const animateCounter = (el, target, suffix = '') => {
+      const start = 0;
+      const duration = 1400;
+      const startTime = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - startTime)/duration, 1);
+        const val = Math.floor(p * (target - start) + start);
+        el.textContent = suffix ? val + suffix : val;
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const counterObserver = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const t = parseInt(e.target.dataset.counter,10);
+          const text = e.target.textContent.trim();
+          const suffix = text.endsWith('%') ? '%' : (text.includes('/') ? text.slice(text.indexOf('/')) : '');
+          animateCounter(e.target, t, suffix);
+          counterObserver.unobserve(e.target);
+        }
+      })
+    }, {threshold:.6});
+    counters.forEach(c=>counterObserver.observe(c));
+
+    // Contact form (simple client-side validation + mailto fallback)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const name = formData.get('name').trim();
+      const email = formData.get('email').trim();
+      const service = formData.get('service');
+      const message = formData.get('message').trim();
+
+      if(!name || !email || !service || !message){
+        alert('Please complete all fields.');
+        return;
+      }
+      // Compose email via mailto:
+      const subject = encodeURIComponent(`Enquiry — ${service}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
+      );
+      window.location.href = `mailto:info@security212.com?subject=${subject}&body=${body}`;
+    });
+
+    // Back to top button
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 600){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
+    });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
