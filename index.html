@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Security 212 — Professional Security & Training</title>
-  <meta name="description" content="Security 212 provides professional security services, staffing, and industry-approved training." />
+  <title>Security 212 — Training • Recruitment • Equipment</title>
+  <meta name="description" content="Security 212 provides security staff training, recruitment, and security equipment including footwear, clothing, and accessories." />
 
   <!-- Favicon (add your file to /images) -->
   <link rel="icon" type="image/png" href="images/favicon.png" />
@@ -16,19 +16,20 @@
 
   <style>
     :root{
-      /* Color scheme inspired by the logo */
-      --primary:#1E5AA8;      /* Security 212 blue */
-      --primary-600:#1b4d8f;
+      --primary:#1E5AA8;
+      --primary-700:#16457f;
       --primary-300:#4a84cb;
-      --ink:#0d1b2a;          /* near-black silhouette tone */
-      --muted:#6b7280;        /* gray text */
-      --bg:#f6f8fb;           /* page background */
-      --card:#ffffff;         /* surfaces */
+      --ink:#0d1b2a;
+      --muted:#6b7280;
+      --bg:#f6f8fb;
+      --card:#ffffff;
       --ring:rgba(30,90,168,.25);
+      --shadow:0 10px 25px rgba(13,27,42,.12), 0 2px 6px rgba(13,27,42,.06);
       --ok:#10b981;
       --warn:#f59e0b;
-      --danger:#ef4444;
-      --shadow:0 10px 25px rgba(13,27,42,.12), 0 2px 6px rgba(13,27,42,.06);
+
+      --radius:18px;
+      --radius-sm:12px;
     }
 
     *{box-sizing:border-box}
@@ -40,148 +41,311 @@
       background:var(--bg);
       line-height:1.6;
     }
+    a{color:inherit}
+    .wrap{max-width:1200px; margin:0 auto; padding:0 18px}
 
     /* Header / Nav */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(180%) blur(10px);
-      background:rgba(255,255,255,.75);
+      background:rgba(255,255,255,.78);
       border-bottom:1px solid rgba(13,27,42,.06);
     }
     .nav-inner{
       max-width:1200px; margin:0 auto; padding:10px 18px;
-      display:flex; align-items:center; gap:18px; justify-content:space-between;
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
     }
     .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
     .brand img{height:42px; width:auto}
-    .brand span{font-weight:800; letter-spacing:.4px; color:var(--primary)}
-    .nav ul{display:flex; gap:18px; list-style:none; padding:0; margin:0}
+    .brand .name{font-weight:800; letter-spacing:.4px; color:var(--primary); line-height:1}
+    .brand .tagline{font-size:12px; color:var(--muted); font-weight:600; margin-top:2px}
+    .nav ul{display:flex; gap:10px; list-style:none; padding:0; margin:0; align-items:center}
     .nav a{
-      text-decoration:none; color:var(--ink); font-weight:600; padding:8px 12px; border-radius:10px;
+      text-decoration:none; color:var(--ink); font-weight:700; padding:9px 12px; border-radius:12px;
     }
     .nav a:hover{background:rgba(30,90,168,.08); color:var(--primary)}
     .nav .cta{
-      background:var(--primary); color:#fff;
-      box-shadow:var(--shadow);
+      background:var(--primary); color:#fff; box-shadow:var(--shadow);
     }
-    .nav .cta:hover{background:var(--primary-600)}
-    .hamburger{display:none; border:none; background:transparent; font-size:26px; padding:6px 10px; border-radius:10px}
+    .nav .cta:hover{background:var(--primary-700); color:#fff}
+    .hamburger{display:none; border:none; background:transparent; font-size:26px; padding:6px 10px; border-radius:12px}
     .hamburger:focus-visible{outline:3px solid var(--ring)}
-
-    /* Mobile menu */
-    @media (max-width: 900px){
+    @media (max-width: 920px){
       .nav ul{display:none}
-      .nav ul.open{display:flex; position:absolute; left:0; right:0; top:65px; background:#fff; padding:14px; flex-direction:column; gap:10px; border-bottom:1px solid rgba(13,27,42,.06)}
+      .nav ul.open{
+        display:flex; position:absolute; left:0; right:0; top:66px; background:#fff;
+        padding:14px 18px; flex-direction:column; gap:8px;
+        border-bottom:1px solid rgba(13,27,42,.06);
+      }
       .hamburger{display:block}
     }
+
+    /* Top bar */
+    .topbar{
+      background:linear-gradient(90deg, var(--primary), var(--primary-300));
+      color:#fff;
+      font-weight:700;
+      font-size:13px;
+    }
+    .topbar .inner{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      padding:10px 18px;
+      max-width:1200px; margin:0 auto;
+    }
+    .topbar a{
+      color:#fff; text-decoration:none; padding:6px 10px; border-radius:999px;
+      background:rgba(255,255,255,.18);
+    }
+    .topbar a:hover{background:rgba(255,255,255,.26)}
 
     /* Hero */
     .hero{
       position:relative; isolation:isolate;
-      min-height:70vh; display:grid; place-items:center; text-align:center;
-      color:#fff; overflow:hidden;
+      overflow:hidden;
+      color:#fff;
       background:
-        linear-gradient(180deg, rgba(13,27,42,.50), rgba(13,27,42,.65)),
-        url("images/hero-security.jpg") center/cover no-repeat; /* add your image */
+        radial-gradient(1200px 500px at 10% 10%, rgba(74,132,203,.35), transparent 55%),
+        linear-gradient(180deg, rgba(13,27,42,.50), rgba(13,27,42,.72)),
+        url("images/hero-security.jpg") center/cover no-repeat;
     }
-    .hero .content{max-width:1000px; padding:80px 18px}
-    .kicker{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(30,90,168,.8); font-weight:700; letter-spacing:.5px}
-    .hero h1{margin:18px 0 12px; font-size:clamp(28px, 6vw, 56px); line-height:1.1}
-    .hero p{margin:0 auto 26px; max-width:780px; font-size:clamp(16px, 2.5vw, 20px); opacity:.95}
+    .hero-grid{
+      min-height:78vh;
+      display:grid;
+      align-items:center;
+      padding:64px 0;
+      gap:26px;
+    }
+    @media (min-width: 980px){
+      .hero-grid{grid-template-columns: 1.15fr .85fr}
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:7px 12px; border-radius:999px;
+      background:rgba(30,90,168,.78);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:800; letter-spacing:.4px;
+      width:fit-content;
+    }
+    .hero h1{margin:16px 0 10px; font-size:clamp(30px, 5.6vw, 58px); line-height:1.05}
+    .hero p{margin:0 0 18px; max-width:720px; font-size:clamp(15px, 2.1vw, 20px); opacity:.95}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:700;
+      padding:12px 16px; border-radius:14px; text-decoration:none; font-weight:800;
       border:2px solid transparent; cursor:pointer; transition:.2s;
+      user-select:none;
     }
     .btn-primary{background:#fff; color:var(--primary)}
     .btn-primary:hover{transform:translateY(-1px)}
-    .btn-outline{border-color:#fff; color:#fff; background:transparent}
+    .btn-outline{border-color:rgba(255,255,255,.85); color:#fff; background:transparent}
     .btn-outline:hover{background:rgba(255,255,255,.12)}
-    .actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+    .btn-ghost{
+      border-color:rgba(255,255,255,.0);
+      color:#fff; background:rgba(255,255,255,.10);
+    }
+    .btn-ghost:hover{background:rgba(255,255,255,.16)}
+    .hero-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;
+      padding:18px;
+      backdrop-filter: blur(10px);
+      box-shadow:0 18px 40px rgba(0,0,0,.22);
+    }
+    .hero-card h3{margin:0 0 10px; font-size:16px; letter-spacing:.2px}
+    .quick-grid{
+      display:grid; gap:10px;
+    }
+    .quick{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:12px; border-radius:16px;
+      background:rgba(13,27,42,.25);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .dot{
+      width:12px; height:12px; border-radius:50%;
+      background:linear-gradient(var(--primary-300), #fff);
+      margin-top:5px;
+      flex:0 0 12px;
+    }
+    .quick strong{display:block; font-size:14px}
+    .quick span{display:block; font-size:13px; opacity:.9}
 
     /* Sections */
-    section{padding:80px 18px}
-    .wrap{max-width:1200px; margin:0 auto}
+    section{padding:78px 0}
+    .section-title{font-size:clamp(24px, 3.4vw, 36px); margin:0 0 10px}
+    .section-sub{color:var(--muted); margin:0 0 26px; max-width:900px}
 
-    .section-title{font-size:clamp(24px, 3.5vw, 36px); margin:0 0 12px}
-    .section-sub{color:var(--muted); margin:0 0 28px}
+    /* Pills */
+    .pills{display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      background:#fff; border:1px solid rgba(13,27,42,.08);
+      box-shadow:0 1px 0 rgba(13,27,42,.04);
+      font-weight:800; font-size:13px;
+    }
+    .pill i{
+      width:9px; height:9px; border-radius:50%;
+      background:var(--primary);
+      display:inline-block;
+    }
 
     /* Cards grid */
     .grid{display:grid; gap:18px}
-    @media (min-width:700px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
-    @media (min-width:900px){ .grid.cols-4{grid-template-columns:repeat(4,1fr)} }
+    @media (min-width:720px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:980px){ .grid.cols-4{grid-template-columns:repeat(4,1fr)} }
 
     .card{
-      background:var(--card); border-radius:18px; padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
       transform:translateZ(0);
+      transition:transform .2s ease;
     }
     .card:hover{transform:translateY(-3px)}
-    .card img{width:100%; height:160px; object-fit:cover; border-radius:12px}
+    .card img{
+      width:100%; height:160px; object-fit:cover;
+      border-radius:var(--radius-sm);
+      background:#e5e7eb;
+    }
+    .card h3{margin:12px 0 8px}
+    .muted{color:var(--muted)}
     .chip{
-      display:inline-block; background:rgba(30,90,168,.1); color:var(--primary); border:1px solid rgba(30,90,168,.25);
-      padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.3px
+      display:inline-block;
+      margin-top:10px;
+      background:rgba(30,90,168,.10);
+      color:var(--primary);
+      border:1px solid rgba(30,90,168,.22);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.3px;
     }
 
-    /* About */
-    .about{
-      display:grid; gap:24px; align-items:center;
+    /* Split section */
+    .split{
+      display:grid; gap:22px; align-items:stretch;
     }
-    @media (min-width:900px){ .about{grid-template-columns:1.2fr .8fr} }
-    .about img{width:100%; border-radius:18px; height:100%; object-fit:cover; box-shadow:var(--shadow)}
+    @media (min-width: 980px){ .split{grid-template-columns:1fr 1fr} }
+    .panel{
+      background:#fff; border-radius:22px; padding:18px; box-shadow:var(--shadow)
+    }
+    .panel img{
+      width:100%; height:240px; object-fit:cover; border-radius:18px
+    }
 
-    /* Stats */
-    .stats{display:grid; gap:16px}
-    @media (min-width:700px){ .stats{grid-template-columns:repeat(4,1fr)} }
-    .stat{background:#fff; border-radius:16px; padding:18px; text-align:center; box-shadow:var(--shadow)}
-    .stat .num{font-size:34px; font-weight:800; color:var(--primary)}
-    .stat .label{color:var(--muted); font-weight:600}
+    /* Catalog + filters */
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+      margin:14px 0 0;
+    }
+    .search{
+      flex:1 1 260px;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:#fff;
+      border:1px solid rgba(13,27,42,.10);
+      box-shadow:0 1px 0 rgba(13,27,42,.04);
+    }
+    .search input{
+      border:none; outline:none; width:100%;
+      font-family:inherit; font-size:14px;
+    }
+    .seg{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .seg button{
+      border:none;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:900;
+      background:#fff;
+      border:1px solid rgba(13,27,42,.10);
+      transition:.2s;
+    }
+    .seg button.active{
+      background:rgba(30,90,168,.10);
+      border-color:rgba(30,90,168,.28);
+      color:var(--primary);
+    }
+    .seg button:focus-visible{outline:3px solid var(--ring)}
 
-    /* Vacancies / Accordions */
+    /* Accordion */
     .accordion{display:grid; gap:12px}
     .acc{
-      background:#fff; border-radius:14px; box-shadow:var(--shadow); overflow:hidden
+      background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden
     }
     .acc summary{
-      list-style:none; cursor:pointer; padding:16px 18px; font-weight:700; display:flex; align-items:center; justify-content:space-between; gap:10px
+      list-style:none; cursor:pointer; padding:16px 18px;
+      font-weight:900; display:flex; align-items:center; justify-content:space-between; gap:10px
     }
     .acc summary::marker{display:none}
     .acc summary span{color:var(--primary)}
     .acc .content{padding:0 18px 18px; color:var(--muted)}
-    .tag{display:inline-block; padding:4px 8px; border-radius:999px; background:rgba(16,185,129,.12); color:var(--ok); margin-left:auto; font-size:12px; font-weight:800}
+    .tag{
+      display:inline-block;
+      padding:4px 8px; border-radius:999px;
+      background:rgba(16,185,129,.12); color:var(--ok);
+      font-size:12px; font-weight:900;
+    }
+    .tag.warn{background:rgba(245,158,11,.14); color:var(--warn)}
 
-    /* Training timeline */
-    .timeline{position:relative; margin:20px 0; padding-left:20px}
+    /* Timeline */
+    .timeline{position:relative; margin:20px 0 0; padding-left:20px}
     .timeline::before{
-      content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(var(--primary), var(--primary-300));
+      content:""; position:absolute; left:8px; top:0; bottom:0; width:3px;
+      background:linear-gradient(var(--primary), var(--primary-300));
       border-radius:6px;
     }
-    .tl-item{position:relative; margin:0 0 18px 0; background:#fff; padding:14px 14px 14px 18px; border-radius:14px; box-shadow:var(--shadow)}
+    .tl-item{
+      position:relative; margin:0 0 14px 0;
+      background:#fff; padding:14px 14px 14px 18px;
+      border-radius:16px; box-shadow:var(--shadow)
+    }
     .tl-item::before{
-      content:""; position:absolute; left:-2px; top:16px; width:12px; height:12px; border:3px solid #fff; background:var(--primary); border-radius:50%; box-shadow:0 0 0 3px var(--ring)
+      content:""; position:absolute; left:-2px; top:16px;
+      width:12px; height:12px; border:3px solid #fff;
+      background:var(--primary); border-radius:50%;
+      box-shadow:0 0 0 3px var(--ring)
     }
 
     /* Contact */
     .contact{
       display:grid; gap:24px;
     }
-    @media (min-width:900px){ .contact{grid-template-columns:1fr 1fr} }
+    @media (min-width: 980px){ .contact{grid-template-columns:1fr 1fr} }
     .form{
-      background:#fff; border-radius:18px; padding:18px; box-shadow:var(--shadow)
+      background:#fff; border-radius:22px; padding:18px; box-shadow:var(--shadow)
     }
-    label{font-weight:700; font-size:14px}
+    label{font-weight:900; font-size:14px}
     input, textarea, select{
-      width:100%; padding:12px 12px; border-radius:12px; border:1px solid #e5e7eb; margin-top:6px;
+      width:100%; padding:12px 12px;
+      border-radius:14px; border:1px solid #e5e7eb;
+      margin-top:6px;
       font-family:inherit; font-size:15px; background:#fff;
     }
     input:focus, textarea:focus, select:focus{outline:3px solid var(--ring); border-color:var(--primary-300)}
     textarea{min-height:130px; resize:vertical}
-    .muted{color:var(--muted)}
 
     /* Footer */
-    footer{padding:40px 18px; background:#0f172a; color:#d1d5db}
-    .footer-inner{max-width:1200px; margin:0 auto; display:grid; gap:14px; align-items:center}
+    footer{padding:40px 0; background:#0f172a; color:#d1d5db}
+    .footer-inner{
+      max-width:1200px; margin:0 auto; padding:0 18px;
+      display:grid; gap:14px; align-items:center
+    }
     .foot-grid{display:grid; gap:12px}
-    @media (min-width:800px){ .footer-inner{grid-template-columns:auto 1fr auto} .foot-grid{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width: 900px){
+      .footer-inner{grid-template-columns:auto 1fr auto}
+      .foot-grid{grid-template-columns:repeat(3,1fr); align-items:center}
+    }
 
     /* Reveal animation */
     .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
@@ -190,30 +354,53 @@
     /* Back to top */
     .to-top{
       position:fixed; right:16px; bottom:16px; z-index:40;
-      display:none; padding:10px 12px; border-radius:12px; background:var(--primary); color:#fff; border:none; box-shadow:var(--shadow);
-      cursor:pointer; font-weight:800;
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      font-weight:900;
     }
     .to-top.show{display:block}
+
+    /* Small helpers */
+    .fine{font-size:12px; color:var(--muted)}
+    .two-col{display:grid; gap:12px}
+    @media (min-width: 720px){ .two-col{grid-template-columns:1fr 1fr} }
   </style>
 </head>
+
 <body>
+
+  <!-- TOP BAR -->
+  <div class="topbar" role="note" aria-label="Quick links">
+    <div class="inner">
+      <div>Training • Recruitment • Equipment for Security Professionals</div>
+      <a href="#contact">Enquire now</a>
+    </div>
+  </div>
 
   <!-- NAV -->
   <header class="nav" aria-label="Primary">
     <div class="nav-inner">
       <a class="brand" href="#home" aria-label="Security 212 home">
-        <!-- Replace with your logo in /images -->
         <img src="images/security212-logo.png" alt="Security 212 logo" />
-        <span>SECURITY 212</span>
+        <div>
+          <div class="name">SECURITY 212</div>
+          <div class="tagline">Training • Recruitment • Equipment</div>
+        </div>
       </a>
 
       <button class="hamburger" aria-label="Open menu" id="menuBtn">☰</button>
 
       <ul id="menu">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#vacances">Vacancies</a></li>
         <li><a href="#training">Training</a></li>
+        <li><a href="#recruitment">Recruitment</a></li>
+        <li><a href="#equipment">Equipment</a></li>
+        <li><a href="#services">Security Services</a></li>
         <li><a class="cta" href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -221,254 +408,365 @@
 
   <!-- HERO -->
   <section class="hero" id="home" role="region" aria-label="Hero">
-    <div class="content">
-      <span class="kicker">Professional • Reliable • Compliant</span>
-      <h1>Protecting People, Property & Reputation</h1>
-      <p>
-        From manned guarding and mobile patrols to CCTV operations and industry-approved training,
-        Security 212 delivers dependable security solutions across the UK.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#services">Explore Services</a>
-        <a class="btn btn-outline" href="#contact">Get a Quote</a>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">Compliant • Job-ready • Professional</span>
+          <h1>Everything Security Staff Need — from Training to Uniform</h1>
+          <p>
+            Security 212 supports the industry with practical security training, reliable staffing recruitment,
+            and a curated range of security equipment including clothing, shoes and essential accessories.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#training">View Training</a>
+            <a class="btn btn-outline" href="#equipment">Shop Equipment</a>
+            <a class="btn btn-ghost" href="#recruitment">Hire Staff</a>
+          </div>
+
+          <div class="pills">
+            <span class="pill"><i></i> SIA-aligned delivery</span>
+            <span class="pill"><i></i> Vetted candidates</span>
+            <span class="pill"><i></i> Uniform & footwear</span>
+            <span class="pill"><i></i> Fast enquiries</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Quick actions">
+          <h3>Quick requests</h3>
+          <div class="quick-grid">
+            <div class="quick">
+              <div class="dot"></div>
+              <div>
+                <strong>Book training</strong>
+                <span>Tell us the course, dates and numbers.</span>
+              </div>
+            </div>
+            <div class="quick">
+              <div class="dot"></div>
+              <div>
+                <strong>Recruit staff</strong>
+                <span>Roles, shifts, location and start date.</span>
+              </div>
+            </div>
+            <div class="quick">
+              <div class="dot"></div>
+              <div>
+                <strong>Equipment order</strong>
+                <span>Sizes, quantity and delivery postcode.</span>
+              </div>
+            </div>
+          </div>
+          <div class="actions" style="margin-top:14px">
+            <a class="btn btn-primary" href="#contact" style="width:100%">Get a quote</a>
+          </div>
+          <div class="fine" style="margin-top:10px">
+            Prefer email? <a href="mailto:info@security212.com">info@security212.com</a>
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="wrap">
-    <h2 class="section-title reveal">Our Services</h2>
-    <p class="section-sub reveal">Flexible security packages tailored to your site, risk and budget.</p>
-
-    <div class="grid cols-3">
-      <article class="card reveal">
-        <img src="images/services-manned-guarding.jpg" alt="Manned guarding" loading="lazy">
-        <h3>Manned Guarding</h3>
-        <p class="muted">SIA-licensed officers providing static guarding, reception cover, concierge and access control.</p>
-        <span class="chip">24/7 Cover</span>
-      </article>
-
-      <article class="card reveal">
-        <img src="images/services-mobile-patrols.jpg" alt="Mobile patrols" loading="lazy">
-        <h3>Mobile Patrols & Keyholding</h3>
-        <p class="muted">Scheduled & ad-hoc patrols, alarm response and secure locking/unlocking of premises.</p>
-        <span class="chip">Rapid Response</span>
-      </article>
-
-      <article class="card reveal">
-        <img src="images/services-cctv.jpg" alt="CCTV" loading="lazy">
-        <h3>CCTV Monitoring</h3>
-        <p class="muted">Remote monitoring, analytics, evidence packs and incident reporting to support prosecutions.</p>
-        <span class="chip">BS-compliant</span>
-      </article>
-
-      <article class="card reveal">
-        <img src="images/services-events.jpg" alt="Event security" loading="lazy">
-        <h3>Event & Venue Security</h3>
-        <p class="muted">Stewarding, crowd management and search teams for venues, festivals and private events.</p>
-        <span class="chip">Crowd Safe</span>
-      </article>
-
-      <article class="card reveal">
-        <img src="images/services-retail.jpg" alt="Retail security" loading="lazy">
-        <h3>Retail & Loss Prevention</h3>
-        <p class="muted">Plain-clothes and uniformed officers to deter theft, manage incidents and protect staff.</p>
-        <span class="chip">Shrink Control</span>
-      </article>
-
-      <article class="card reveal">
-        <img src="images/services-consulting.jpg" alt="Security consulting" loading="lazy">
-        <h3>Risk Assessment & Consulting</h3>
-        <p class="muted">Threat assessments, assignment instructions, and tailored policies to meet standards.</p>
-        <span class="chip">Expert Advice</span>
-      </article>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="wrap">
-    <div class="about">
-      <div>
-        <h2 class="section-title reveal">About Security 212</h2>
-        <p class="section-sub reveal">We combine disciplined officers, robust supervision and transparent reporting.</p>
-
-        <div class="stats">
-          <div class="stat reveal">
-            <div class="num" data-counter="150">0</div>
-            <div class="label">Sites Protected</div>
-          </div>
-          <div class="stat reveal">
-            <div class="num" data-counter="98">0%</div>
-            <div class="label">Client Retention</div>
-          </div>
-          <div class="stat reveal">
-            <div class="num" data-counter="24">0/7</div>
-            <div class="label">Operations</div>
-          </div>
-          <div class="stat reveal">
-            <div class="num" data-counter="100">0%</div>
-            <div class="label">SIA Compliant</div>
-          </div>
-        </div>
-
-        <p class="muted reveal" style="margin-top:16px">
-          Based in Coventry, we serve clients nationwide with vetted, SIA-licensed professionals and
-          proactive management. Our digital logs and real-time reporting keep you fully informed.
-        </p>
-      </div>
-      <img class="reveal" src="images/about-team.jpg" alt="Security 212 team photo" loading="lazy">
-    </div>
-  </section>
-
-  <!-- VACANCIES -->
-  <section id="vacances" class="wrap">
-    <h2 class="section-title reveal">Vacancies</h2>
-    <p class="section-sub reveal">Join a professional team that invests in your development.</p>
-
-    <div class="accordion">
-      <details class="acc reveal">
-        <summary>
-          <span>Door Supervisor (Various Sites)</span>
-          <span class="tag">Hiring</span>
-        </summary>
-        <div class="content">
-          <p>Requirements: Valid SIA Door Supervisor licence, excellent communication, flexible availability.</p>
-          <p>Shift pattern: Days/Nights/Weekends. Competitive hourly rate, paid training and progression.</p>
-          <a class="btn btn-outline" href="#contact">Apply Now</a>
-        </div>
-      </details>
-
-      <details class="acc reveal">
-        <summary>
-          <span>Retail Security Officer – Midlands</span>
-          <span class="tag">New</span>
-        </summary>
-        <div class="content">
-          <p>Experience in retail/loss prevention preferred. Body-worn video and incident reporting skills useful.</p>
-          <a class="btn btn-outline" href="#contact">Apply Now</a>
-        </div>
-      </details>
-
-      <details class="acc reveal">
-        <summary>
-          <span>CCTV Operator (PSS)</span>
-          <span class="tag">Hot</span>
-        </summary>
-        <div class="content">
-          <p>Valid SIA CCTV (PSS) licence required. Control room experience and evidence handling desirable.</p>
-          <a class="btn btn-outline" href="#contact">Apply Now</a>
-        </div>
-      </details>
     </div>
   </section>
 
   <!-- TRAINING -->
-  <section id="training" class="wrap">
-    <h2 class="section-title reveal">Training</h2>
-    <p class="section-sub reveal">Industry-aligned courses that boost confidence and employability.</p>
+  <section id="training">
+    <div class="wrap">
+      <h2 class="section-title reveal">Security Staff Training</h2>
+      <p class="section-sub reveal">
+        Practical, employer-focused training to help learners qualify, perform confidently on shift, and stay compliant.
+      </p>
 
-    <div class="grid cols-3">
-      <article class="card reveal">
-        <img src="images/training-door.jpg" alt="Door supervisor training" loading="lazy">
-        <h3>Award for Door Supervisors</h3>
-        <p class="muted">Complete qualification with practical scenarios, conflict management and physical intervention.</p>
-        <span class="chip">Popular</span>
-      </article>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <img src="images/training-door.jpg" alt="Door supervisor training" loading="lazy">
+          <h3>Door Supervisor Training</h3>
+          <p class="muted">Scenario-led delivery covering conflict management, searching, professional conduct and physical intervention.</p>
+          <span class="chip">High demand</span>
+        </article>
 
-      <article class="card reveal">
-        <img src="images/training-cctv.jpg" alt="CCTV training" loading="lazy">
-        <h3>Award for CCTV Operators</h3>
-        <p class="muted">Control room operations, legislation and evidence handling for PSS environments.</p>
-        <span class="chip">2 Days</span>
-      </article>
+        <article class="card reveal">
+          <img src="images/training-cctv.jpg" alt="CCTV training" loading="lazy">
+          <h3>CCTV Operator Training</h3>
+          <p class="muted">Control room operations, legislation, incident logging and evidence handling for PSS environments.</p>
+          <span class="chip">Fast turnaround</span>
+        </article>
 
-      <article class="card reveal">
-        <img src="images/training-health-safety.jpg" alt="First aid and safety" loading="lazy">
-        <h3>Emergency First Aid at Work</h3>
-        <p class="muted">Practical, workplace-focused first aid suitable for security roles and sites.</p>
-        <span class="chip">1 Day</span>
-      </article>
+        <article class="card reveal">
+          <img src="images/training-health-safety.jpg" alt="First aid training" loading="lazy">
+          <h3>First Aid (Security Roles)</h3>
+          <p class="muted">Practical workplace first aid that supports safer shifts and meets common site requirements.</p>
+          <span class="chip">Essential</span>
+        </article>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal"><strong>Step 1:</strong> Choose a course and preferred dates.</div>
+        <div class="tl-item reveal"><strong>Step 2:</strong> Complete any required pre-learning.</div>
+        <div class="tl-item reveal"><strong>Step 3:</strong> Attend training & assessments.</div>
+        <div class="tl-item reveal"><strong>Step 4:</strong> Certification + guidance towards employment.</div>
+      </div>
+
+      <div class="actions" style="margin-top:18px">
+        <a class="btn btn-primary" href="#contact">Enquire about training</a>
+        <a class="btn btn-outline" href="mailto:info@security212.com?subject=Training%20Enquiry">Email training team</a>
+      </div>
     </div>
+  </section>
 
-    <div class="timeline">
-      <div class="tl-item reveal"><strong>Step 1:</strong> Choose your course and preferred dates.</div>
-      <div class="tl-item reveal"><strong>Step 2:</strong> Complete online pre-course learning (where applicable).</div>
-      <div class="tl-item reveal"><strong>Step 3:</strong> Attend training & assessments at our centre or your site.</div>
-      <div class="tl-item reveal"><strong>Step 4:</strong> Receive certification and get work-ready with Security 212.</div>
+  <!-- RECRUITMENT -->
+  <section id="recruitment">
+    <div class="wrap">
+      <h2 class="section-title reveal">Security Staff Recruitment</h2>
+      <p class="section-sub reveal">
+        We help clients recruit dependable, presentable security professionals. Tell us your requirements and we’ll match accordingly.
+      </p>
+
+      <div class="split">
+        <div class="panel reveal">
+          <h3 style="margin:0 0 10px">For employers</h3>
+          <p class="muted" style="margin:0 0 14px">
+            Need staff for venues, retail, corporate, construction or events? We can support recruitment for roles such as:
+          </p>
+          <div class="two-col">
+            <div class="card" style="box-shadow:none; border:1px solid rgba(13,27,42,.08);">
+              <strong>Common roles</strong>
+              <div class="muted" style="margin-top:6px">
+                Door Supervisor • Security Officer • CCTV Operator • Event Stewarding
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none; border:1px solid rgba(13,27,42,.08);">
+              <strong>What to send us</strong>
+              <div class="muted" style="margin-top:6px">
+                Location • Hours • Start date • Licence type • Dress code
+              </div>
+            </div>
+          </div>
+          <div class="actions" style="margin-top:14px">
+            <a class="btn btn-primary" href="#contact">Request staff</a>
+            <a class="btn btn-outline" href="#vacancies">View vacancies</a>
+          </div>
+        </div>
+
+        <div class="panel reveal">
+          <img src="images/about-team.jpg" alt="Security 212 team" loading="lazy">
+          <div class="pills" style="margin-top:14px">
+            <span class="pill"><i></i> Screening aligned to role</span>
+            <span class="pill"><i></i> Right-fit matching</span>
+            <span class="pill"><i></i> Clear communication</span>
+            <span class="pill"><i></i> Start-ready support</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="actions">
-      <a class="btn btn-primary" href="#contact">Enquire About Training</a>
-      <a class="btn btn-outline" href="mailto:info@security212.com?subject=Training%20Enquiry">Email Us</a>
+  <!-- EQUIPMENT -->
+  <section id="equipment">
+    <div class="wrap">
+      <h2 class="section-title reveal">Security Equipment</h2>
+      <p class="section-sub reveal">
+        Clothing, footwear and accessories selected for comfort, presentation and practical use on shift.
+      </p>
+
+      <div class="filters reveal" aria-label="Equipment filters">
+        <div class="search" role="search">
+          <span aria-hidden="true">🔎</span>
+          <input id="equipSearch" type="search" placeholder="Search equipment (e.g., shoes, jacket, torch, belt)..." />
+        </div>
+
+        <div class="seg" aria-label="Categories">
+          <button class="active" data-filter="all" type="button">All</button>
+          <button data-filter="clothing" type="button">Clothing</button>
+          <button data-filter="footwear" type="button">Shoes</button>
+          <button data-filter="accessories" type="button">Accessories</button>
+        </div>
+      </div>
+
+      <div class="grid cols-4" id="equipGrid" style="margin-top:16px">
+        <!-- Try to keep same images – replace filenames only if yours differ -->
+        <article class="card reveal" data-cat="clothing" data-name="tactical jacket clothing">
+          <img src="images/services-manned-guarding.jpg" alt="Security clothing" loading="lazy">
+          <h3>Security Clothing</h3>
+          <p class="muted">Professional layers for shift comfort and a smart appearance.</p>
+          <span class="chip">Sizes available</span>
+        </article>
+
+        <article class="card reveal" data-cat="footwear" data-name="security shoes boots footwear">
+          <img src="images/services-mobile-patrols.jpg" alt="Security footwear" loading="lazy">
+          <h3>Security Shoes & Boots</h3>
+          <p class="muted">Supportive footwear for long shifts, indoor and outdoor use.</p>
+          <span class="chip">Comfort first</span>
+        </article>
+
+        <article class="card reveal" data-cat="accessories" data-name="belt torch radio earpiece accessories">
+          <img src="images/services-cctv.jpg" alt="Security accessories" loading="lazy">
+          <h3>Accessories</h3>
+          <p class="muted">Belts, torches, pouches and essentials to keep you organised.</p>
+          <span class="chip">Shift-ready</span>
+        </article>
+
+        <article class="card reveal" data-cat="accessories" data-name="hi vis vest gloves accessories">
+          <img src="images/services-events.jpg" alt="High visibility and PPE" loading="lazy">
+          <h3>PPE & Hi-Vis</h3>
+          <p class="muted">Practical add-ons for site requirements and safer working.</p>
+          <span class="chip">Site compliant</span>
+        </article>
+      </div>
+
+      <div class="actions" style="margin-top:18px">
+        <a class="btn btn-primary" href="#contact">Request a price list</a>
+        <a class="btn btn-outline" href="mailto:info@security212.com?subject=Equipment%20Enquiry">Email equipment team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY SERVICES (not main) -->
+  <section id="services">
+    <div class="wrap">
+      <h2 class="section-title reveal">Security Services</h2>
+      <p class="section-sub reveal">
+        We can support operational cover when required — but our main focus is training, recruitment and equipment.
+      </p>
+
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <img src="images/services-retail.jpg" alt="Retail security" loading="lazy">
+          <h3>Retail & Loss Prevention</h3>
+          <p class="muted">Uniformed presence, incident reporting and staff support.</p>
+          <span class="chip">On request</span>
+        </article>
+
+        <article class="card reveal">
+          <img src="images/services-events.jpg" alt="Event security" loading="lazy">
+          <h3>Event & Venue Support</h3>
+          <p class="muted">Stewarding and door cover based on risk and requirements.</p>
+          <span class="chip">Flexible</span>
+        </article>
+
+        <article class="card reveal">
+          <img src="images/services-consulting.jpg" alt="Security consulting" loading="lazy">
+          <h3>Site Advice</h3>
+          <p class="muted">Basic guidance to improve procedures and reduce incidents.</p>
+          <span class="chip">Practical</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VACANCIES -->
+  <section id="vacancies">
+    <div class="wrap">
+      <h2 class="section-title reveal">Vacancies</h2>
+      <p class="section-sub reveal">Join a professional team — or register your interest for upcoming roles.</p>
+
+      <div class="accordion">
+        <details class="acc reveal">
+          <summary>
+            <span>Door Supervisor (Various Sites)</span>
+            <span class="tag">Hiring</span>
+          </summary>
+          <div class="content">
+            <p>Requirements: Valid SIA Door Supervisor licence, strong communication, professional presentation.</p>
+            <p>Shifts: Days/Nights/Weekends. Progression available for dependable staff.</p>
+            <a class="btn btn-outline" href="#contact">Apply / Register interest</a>
+          </div>
+        </details>
+
+        <details class="acc reveal">
+          <summary>
+            <span>Retail Security Officer</span>
+            <span class="tag warn">New</span>
+          </summary>
+          <div class="content">
+            <p>Experience preferred. Good report writing and customer service skills required.</p>
+            <a class="btn btn-outline" href="#contact">Apply / Register interest</a>
+          </div>
+        </details>
+
+        <details class="acc reveal">
+          <summary>
+            <span>CCTV Operator (PSS)</span>
+            <span class="tag">Open</span>
+          </summary>
+          <div class="content">
+            <p>Valid SIA CCTV (PSS) licence required. Control room experience beneficial.</p>
+            <a class="btn btn-outline" href="#contact">Apply / Register interest</a>
+          </div>
+        </details>
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="wrap">
-    <h2 class="section-title reveal">Contact Us</h2>
-    <p class="section-sub reveal">We’ll respond promptly with the information you need.</p>
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title reveal">Contact</h2>
+      <p class="section-sub reveal">Tell us what you need — training, staffing recruitment, or equipment — and we’ll get back quickly.</p>
 
-    <div class="contact">
-      <div class="form reveal">
-        <form id="contactForm" novalidate>
-          <div style="display:grid; gap:12px; grid-template-columns:1fr 1fr">
-            <div>
-              <label for="name">Name</label>
-              <input id="name" name="name" placeholder="Your full name" required>
+      <div class="contact">
+        <div class="form reveal">
+          <form id="contactForm" novalidate>
+            <div class="two-col">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your full name" required>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required>
+              </div>
             </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <div style="margin-top:12px">
+              <label for="topic">What is your enquiry about?</label>
+              <select id="topic" name="topic" required>
+                <option value="">Select…</option>
+                <option>Training</option>
+                <option>Recruitment (Hire Staff)</option>
+                <option>Equipment (Clothing / Shoes / Accessories)</option>
+                <option>Security Services (Secondary)</option>
+                <option>Jobs / Vacancies</option>
+                <option>Other</option>
+              </select>
             </div>
-          </div>
 
-          <div style="margin-top:12px">
-            <label for="service">Service</label>
-            <select id="service" name="service" required>
-              <option value="">Select…</option>
-              <option>Manned Guarding</option>
-              <option>Mobile Patrols & Keyholding</option>
-              <option>CCTV Monitoring</option>
-              <option>Event Security</option>
-              <option>Retail Security</option>
-              <option>Training</option>
-              <option>Other</option>
-            </select>
-          </div>
+            <div style="margin-top:12px">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Include location, dates, quantities, and any requirements…" required></textarea>
+            </div>
 
-          <div style="margin-top:12px">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your site or training needs…" required></textarea>
-          </div>
+            <div style="margin-top:14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+              <button class="btn btn-primary" type="submit">Send enquiry</button>
+              <span class="muted" id="formNote">Or email us at <a href="mailto:info@security212.com">info@security212.com</a></span>
+            </div>
 
-          <div style="margin-top:14px; display:flex; gap:10px; align-items:center">
-            <button class="btn btn-primary" type="submit">Send Enquiry</button>
-            <span class="muted" id="formNote">Or email us at <a href="mailto:info@security212.com">info@security212.com</a></span>
-          </div>
-        </form>
-      </div>
-
-      <div class="reveal">
-        <div class="card">
-          <h3>Company Details</h3>
-          <p class="muted">Email: <a href="mailto:info@security212.com">info@security212.com</a></p>
-          <p class="muted" style="margin-bottom:0">
-            Address: 111 New Union Street, Coventry, England, CV1 2NT
-          </p>
+            <div class="fine" style="margin-top:12px">
+              Tip: For equipment, include sizes + quantities. For recruitment, include role + shift pattern + start date.
+            </div>
+          </form>
         </div>
 
-        <div class="card" style="margin-top:18px">
-          <h3>Why Security 212?</h3>
-          <ul class="muted">
-            <li>Experienced, SIA-licensed professionals</li>
-            <li>Responsive management and clear reporting</li>
-            <li>Tailored solutions for every sector</li>
-          </ul>
+        <div class="reveal">
+          <div class="card">
+            <h3>Company details</h3>
+            <p class="muted">Email: <a href="mailto:info@security212.com">info@security212.com</a></p>
+            <p class="muted" style="margin-bottom:0">Address: 111 New Union Street, Coventry, England, CV1 2NT</p>
+          </div>
+
+          <div class="card" style="margin-top:18px">
+            <h3>What we do best</h3>
+            <ul class="muted" style="margin:10px 0 0; padding-left:18px">
+              <li>Security staff training that focuses on real shift performance</li>
+              <li>Recruitment support for dependable, professional staff</li>
+              <li>Equipment supply: clothing, shoes and shift accessories</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div style="display:flex; align-items:center; gap:10px">
@@ -478,8 +776,10 @@
 
       <div class="foot-grid">
         <div><small>&copy; <span id="year"></span> Security 212. All rights reserved.</small></div>
-        <div><small>Made with care and compliance.</small></div>
-        <div style="text-align:right"><a class="btn" href="#home" style="background:#111827; color:#fff; padding:8px 14px">Back to top ↑</a></div>
+        <div><small>Training • Recruitment • Equipment</small></div>
+        <div style="text-align:right">
+          <a class="btn" href="#home" style="background:#111827; color:#fff; padding:8px 14px">Back to top ↑</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -492,71 +792,80 @@
     const menu = document.getElementById('menu');
     menuBtn.addEventListener('click', () => menu.classList.toggle('open'));
 
-    // IntersectionObserver for reveal animations
+    // Reveal on scroll
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, {threshold:.2});
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .18 });
     revealEls.forEach(el => io.observe(el));
 
-    // Animated counters
-    const counters = document.querySelectorAll('[data-counter]');
-    const animateCounter = (el, target, suffix = '') => {
-      const start = 0;
-      const duration = 1400;
-      const startTime = performance.now();
-      const step = (now) => {
-        const p = Math.min((now - startTime)/duration, 1);
-        const val = Math.floor(p * (target - start) + start);
-        el.textContent = suffix ? val + suffix : val;
-        if(p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
-    const counterObserver = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          const t = parseInt(e.target.dataset.counter,10);
-          const text = e.target.textContent.trim();
-          const suffix = text.endsWith('%') ? '%' : (text.includes('/') ? text.slice(text.indexOf('/')) : '');
-          animateCounter(e.target, t, suffix);
-          counterObserver.unobserve(e.target);
-        }
-      })
-    }, {threshold:.6});
-    counters.forEach(c=>counterObserver.observe(c));
+    // Back to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 650) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Contact form (simple client-side validation + mailto fallback)
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form => mailto
     const form = document.getElementById('contactForm');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const formData = new FormData(form);
-      const name = formData.get('name').trim();
-      const email = formData.get('email').trim();
-      const service = formData.get('service');
-      const message = formData.get('message').trim();
+      const fd = new FormData(form);
+      const name = (fd.get('name') || '').trim();
+      const email = (fd.get('email') || '').trim();
+      const topic = (fd.get('topic') || '').trim();
+      const message = (fd.get('message') || '').trim();
 
-      if(!name || !email || !service || !message){
+      if(!name || !email || !topic || !message){
         alert('Please complete all fields.');
         return;
       }
-      // Compose email via mailto:
-      const subject = encodeURIComponent(`Enquiry — ${service}`);
+
+      const subject = encodeURIComponent(`Enquiry — ${topic}`);
       const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
+        `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`
       );
       window.location.href = `mailto:info@security212.com?subject=${subject}&body=${body}`;
     });
 
-    // Back to top button
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 600){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
-    });
-    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+    // Equipment filter + search
+    const equipGrid = document.getElementById('equipGrid');
+    const cards = Array.from(equipGrid.querySelectorAll('[data-cat]'));
+    const search = document.getElementById('equipSearch');
+    const filterBtns = Array.from(document.querySelectorAll('[data-filter]'));
+    let activeFilter = 'all';
 
-    // Current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    function applyFilters(){
+      const q = (search.value || '').toLowerCase().trim();
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-cat');
+        const name = (card.getAttribute('data-name') || '').toLowerCase();
+        const matchesCat = (activeFilter === 'all') || (cat === activeFilter);
+        const matchesQuery = !q || name.includes(q);
+        card.style.display = (matchesCat && matchesQuery) ? '' : 'none';
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    search.addEventListener('input', applyFilters);
   </script>
+
 </body>
 </html>
